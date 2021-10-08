@@ -19,13 +19,19 @@ namespace FunctionApp3
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            for (int i = 1; i <= 15; i++)
+            // Multiple cancellation tokens can be linked so that either can request to cancel
+            using (var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                cancellationToken,
+                req.HttpContext.RequestAborted))
             {
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-                if (req.HttpContext.RequestAborted.IsCancellationRequested) throw new Exception($"Request aborted after {i} seconds");
-            }
+                for (int i = 1; i <= 15; i++)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1), linkedTokenSource.Token);
+                    if (linkedTokenSource.Token.IsCancellationRequested) throw new Exception($"Request aborted after {i} seconds");
+                }
 
-            return new OkObjectResult("Hello from Function 3");
+                return new OkObjectResult("Hello from Function 3");
+            }
         }
     }
 }
