@@ -12,6 +12,14 @@ How does DAPR handle timeouts (and GRPC)
 
 ## References
 
+<https://www.stevejgordon.co.uk/sending-and-receiving-json-using-httpclient-with-system-net-http-json>
+
+<https://johnthiriet.com/efficient-post-calls/>
+
+<https://docs.microsoft.com/en-us/aspnet/core/performance/performance-best-practices?view=aspnetcore-5.0#avoid-blocking-calls>
+
+https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1#return-ienumerablet-or-iasyncenumerablet
+
 Release It! 2nd edition by Michael T. Nygard. Timeouts: <https://learning.oreilly.com/library/view/release-it-2nd/9781680504552/f_0048.xhtml#stability-patterns.timeout>
 
 `HttpContext.RequestAborted` <https://stackoverflow.com/a/51816341/610731>
